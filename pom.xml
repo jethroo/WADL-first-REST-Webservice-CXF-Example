@@ -71,7 +71,7 @@
 							<wadlOptions>
 								<wadlOption>
 									<wadl>
-										${basedir}/src/main/resources/example.wadl
+										${basedir}/src/main/resources/example.xml
 									</wadl>
 									<packagename>de.jethroo.rest.example</packagename>
 								</wadlOption>

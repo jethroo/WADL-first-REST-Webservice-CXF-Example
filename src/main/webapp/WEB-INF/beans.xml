@@ -17,7 +17,7 @@
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	<import resource="classpath*:META-INF/cxf/cxf-extension-*.xml" />
 
-	<jaxrs:server address="http://localhost:8090/api" docLocation="src/main/resources/example.wadl">
+	<jaxrs:server address="http://localhost:8090" docLocation="src/main/resources/example.xml">
 		<jaxrs:serviceBeans>
 			<bean class="de.jethroo.rest.example.ExampleServiceImpl" />
 		</jaxrs:serviceBeans>
