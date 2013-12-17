@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="SERVER_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/jetty.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/jetty_%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="SERVICE_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/service_example.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/service_example_%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</layout>
+
+		<encoder>
+			<pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="de.jethroo" level="debug">
+		<appender-ref ref="SERVICE_FILE" />
+	</logger>
+
+	<root level="debug">
+		<appender-ref ref="SERVER_FILE" />
+	</root>
+</configuration>
