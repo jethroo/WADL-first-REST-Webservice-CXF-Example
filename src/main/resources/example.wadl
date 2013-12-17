@@ -8,6 +8,18 @@
       <method name="GET" id="onRetrieve">
         <doc xml:lang="en" title="onRetrieve"/>
         <request/>
+        <response status="">
+          <representation mediaType="application/json"/>
+        </response>
+        <response status="200">
+          <representation mediaType="application/json"/>
+        </response>
+        <response status="500">
+          <representation mediaType="application/json"/>
+        </response>
+        <response status="400">
+          <representation mediaType="application/json"/>
+        </response>
       </method>
       <method name="GET" id="onList">
         <doc xml:lang="en" title="onList"/>

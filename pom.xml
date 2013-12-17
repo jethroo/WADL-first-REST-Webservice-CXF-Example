@@ -102,10 +102,6 @@
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>7.0.0.pre5</version>
-				<configuration>
-					<stopKey>he is dead jim!</stopKey>
-					<stopPort>9999</stopPort>
-				</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>org.mortbay.jetty</groupId>
