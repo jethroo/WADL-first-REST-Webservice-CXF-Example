@@ -17,7 +17,16 @@ public class ExampleServiceImpl implements Thingies {
 
 	public Response onRetrieve(String id) {
 		logger.debug("recieved GET request for thingies with id : "+id);
-		return Response.ok(serializer.toJson(Response.ok().build()), MediaType.APPLICATION_JSON).build();
+		try {
+			int resource_id = Integer.parseInt(id);
+			// just generate a dummy resource for this request 
+			Thingy somethingy = new Thingy(resource_id, "attribute_value_for_id"+resource_id);
+
+			return Response.ok(serializer.toJson(somethingy), MediaType.APPLICATION_JSON).build();
+		} catch (java.lang.NumberFormatException e) {
+			return Response.status(400).build();
+		}
+		
 	}
 
 	public void onList(String id) {
