@@ -39,13 +39,7 @@ public class ExampleServiceImpl implements Thingies {
 
 	public Response onList() {
 		logger.debug("recieved GET request for thingies (index)");
-
-		// just generate a dummy resource for this request
-		List<Thingy> thingies = new ArrayList<Thingy>();
-		for (int i = 1; i < 5; i++) {
-			thingies.add(new Thingy(i, "foo_" + i));
-		}
-		return Response.ok(serializer.toJson(thingies), MediaType.APPLICATION_JSON).build();
+		return Response.ok(serializer.toJson(dao.selectAll()), MediaType.APPLICATION_JSON).build();
 	}
 
 	public Response onUpdate(int id, String attribute_name) {
