@@ -8,13 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="thingies")
 public class Thingy {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column
 	private Integer id;
+	
 	
 	@Column
 	private String attribute_name;
@@ -33,7 +34,7 @@ public class Thingy {
 		this.attribute_name = attribute_name;
 	}
 
-	
+
 	public Thingy(Integer id, String attribute_name) {
 		super();
 		this.attribute_name = attribute_name;
