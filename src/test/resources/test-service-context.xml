@@ -23,6 +23,10 @@
 	<bean id="thingyDao" class="de.jethroo.rest.example.ThingyDao">
 		<property name="sessionFactory" ref="hibernateSessionFactory" />
 	</bean>
+	
+	<bean id="service" class="de.jethroo.rest.example.ExampleServiceImpl">
+		<property name="dao" ref="thingyDao" />
+	</bean>
 
 	<bean id="hibernateSessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -34,7 +38,7 @@
 		</property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				<prop key="hibernate.current_session_context_class">thread</prop>
