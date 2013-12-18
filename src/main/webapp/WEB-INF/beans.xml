@@ -1,9 +1,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simple="http://cxf.apache.org/simple"
 	xmlns:soap="http://cxf.apache.org/bindings/soap" xmlns:jaxws="http://cxf.apache.org/jaxws"
-	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:sec="http://cxf.apache.org/configuration/security"
-	xmlns:http="http://cxf.apache.org/transports/http/configuration"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:sec="http://cxf.apache.org/configuration/security" xmlns:http="http://cxf.apache.org/transports/http/configuration"
 	xmlns:httpj="http://cxf.apache.org/transports/http-jetty/configuration"
 	xsi:schemaLocation="  
 	 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd  
@@ -22,6 +21,36 @@
 			<bean class="de.jethroo.rest.example.ExampleServiceImpl" />
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
+
+	<!-- This is Database Configuration -->
+	<bean class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" id="dataSource">
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+		<property name="url" value="jdbc\:hsqldb\:mem\:wadl-example" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
+	</bean>
+
+	<bean id="thingyDao" class="de.jethroo.rest.example.ThingyDao">
+		<property name="sessionFactory" ref="hibernateSessionFactory" />
+	</bean>
+
+	<bean id="hibernateSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>de.jethroo.rest.example.Thingy</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+			</props>
+		</property>
+	</bean>
 
 </beans>
 

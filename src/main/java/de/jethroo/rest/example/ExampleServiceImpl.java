@@ -37,8 +37,15 @@ public class ExampleServiceImpl implements Thingies {
 	}
 
 	public Response onUpdate(int id, String attribute_name) {
-		// TODO Auto-generated method stub
-		return null;
+		ThingyDao dao = new ThingyDao();
+		Thingy thing = dao.findById(id);
+		if (thing != null){
+			thing.setAttribute_name(attribute_name);
+		} else {
+			thing = new Thingy(attribute_name);
+		}
+		dao.saveOrUpdate(thing);
+		return Response.ok(serializer.toJson(null), MediaType.APPLICATION_JSON).build();
 	}
 
 	public Response onDelete(int id) {
