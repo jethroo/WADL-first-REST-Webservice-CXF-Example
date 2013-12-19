@@ -43,7 +43,6 @@ public class ExampleServiceImpl implements Thingies {
 	}
 
 	public Response onUpdate(int id, String attribute_name) {
-		ThingyDao dao = new ThingyDao();
 		Thingy thing = dao.findById(id);
 		if (thing != null) {
 			thing.setAttribute_name(attribute_name);
@@ -51,7 +50,7 @@ public class ExampleServiceImpl implements Thingies {
 			thing = new Thingy(attribute_name);
 		}
 		dao.saveOrUpdate(thing);
-		return Response.ok(serializer.toJson(null), MediaType.APPLICATION_JSON).build();
+		return Response.ok(serializer.toJson(thing), MediaType.APPLICATION_JSON).build();
 	}
 
 	public Response onDelete(int id) {
