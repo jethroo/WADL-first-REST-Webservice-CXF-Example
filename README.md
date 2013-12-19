@@ -29,11 +29,56 @@ of this resource. The table below shows the methods and paths for the example re
 
 | Method | HTTP Verb | Path           |
 | ------ | --------- | -------------- |
-| Create | POST      | /thingies      |
-| Read   | GET       | /thingies/{id} |
-| Update | PUT       | /thingies/{id} |
-| Delete | DELETE    | /thingies/{id} |
-| Index  | GET       | /thingies      |
+| create | POST      | /thingies      |
+| read   | GET       | /thingies/{id} |
+| update | PUT       | /thingies/{id} |
+| delete | DELETE    | /thingies/{id} |
+| index  | GET       | /thingies      |
+
+The excerpt of the [WADL](WADL-first-REST-Webservice-CXF-Example/blob/master/src/main/resources/example.xml) below shows the specification of the methods `create` and `get`. Last mentioned method specifies which
+instance of resource to be retrieved within the request URL such as `GET /things/1` will return a `Thingy` with `id=1` (if existent).
+
+```xml
+<resource path="/thingies" id="thingies">
+  <doc xml:lang="en" title="thingies" />
+  <resource path="{id}">
+    <method name="GET" id="onRead">
+      <doc xml:lang="en" title="onRead" />
+      <request>
+        <param name="id" type="xs:int" required="true" default=""
+          style="template" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+      </request>
+      <response status="200">
+        <representation mediaType="application/json" />
+      </response>
+      <response status="500">
+        <representation mediaType="application/json" />
+      </response>
+      <response status="404">
+        <representation mediaType="application/json" />
+      </response>
+    </method>
+    ...
+  </resource>
+  <method name="POST" id="onCreate">
+    <doc xml:lang="en" title="onCreate" />
+    <request>
+      <param name="attribute_name" type="xs:string" required="true"
+        default="" style="query" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+      <representation mediaType="application/json" />
+    </request>
+    <response status="200">
+      <representation mediaType="application/json" />
+    </response>
+    <response status="400">
+      <representation mediaType="application/json" />
+    </response>
+    <response status="500">
+      <representation mediaType="application/json" />
+    </response>
+  </method>
+</resource>
+```
 
 
 ## License
