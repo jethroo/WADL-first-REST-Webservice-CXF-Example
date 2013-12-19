@@ -54,7 +54,9 @@
 	
 	<jaxrs:server address="http://localhost:8090" docLocation="src/main/resources/example.xml">
 		<jaxrs:serviceBeans>
-			<bean class="de.jethroo.rest.example.ExampleServiceImpl" />
+			<bean class="de.jethroo.rest.example.ExampleServiceImpl">
+				<property name="dao" ref="thingyDao" />
+			</bean>
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
 
