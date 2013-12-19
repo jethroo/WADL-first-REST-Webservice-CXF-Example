@@ -34,7 +34,7 @@ public class ExampleServiceImpl implements Thingies {
 				return Response.ok(serializer.toJson(result), MediaType.APPLICATION_JSON).build();
 			}
 		}
-		return Response.noContent().build();
+		return Response.status(404).build();
 	}
 
 	public Response onList() {
@@ -46,16 +46,26 @@ public class ExampleServiceImpl implements Thingies {
 		Thingy thing = dao.findById(id);
 		if (thing != null) {
 			thing.setAttribute_name(attribute_name);
+			dao.saveOrUpdate(thing);
+			return Response.ok(serializer.toJson(thing), MediaType.APPLICATION_JSON).build();
 		} else {
-			thing = new Thingy(attribute_name);
+			return Response.status(404).build();
 		}
-		dao.saveOrUpdate(thing);
-		return Response.ok(serializer.toJson(thing), MediaType.APPLICATION_JSON).build();
 	}
 
 	public Response onDelete(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Response onCreate(String attribute_name) {
+		if (attribute_name != null){
+			Thingy thingy = new Thingy(attribute_name);
+			dao.saveOrUpdate(thingy);
+			return Response.ok(serializer.toJson(thingy), MediaType.APPLICATION_JSON).build();
+		}
+		return Response.status(400).build();
 	}
 
 }

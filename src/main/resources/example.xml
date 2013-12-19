@@ -17,7 +17,7 @@
 					<response status="500">
 						<representation mediaType="application/json" />
 					</response>
-					<response status="400">
+					<response status="404">
 						<representation mediaType="application/json" />
 					</response>
 				</method>
@@ -33,7 +33,7 @@
 					<response status="200">
 						<representation mediaType="application/json" />
 					</response>
-					<response status="400">
+					<response status="404">
 						<representation mediaType="application/json" />
 					</response>
 					<response status="500">
@@ -49,7 +49,7 @@
 					<response status="200">
 						<representation mediaType="application/json" />
 					</response>
-					<response status="400">
+					<response status="404">
 						<representation mediaType="application/json" />
 					</response>
 					<response status="500">
@@ -60,6 +60,23 @@
 			<method name="GET" id="onList">
 				<doc xml:lang="en" title="onList" />
 				<request />
+				<response status="200">
+					<representation mediaType="application/json" />
+				</response>
+				<response status="400">
+					<representation mediaType="application/json" />
+				</response>
+				<response status="500">
+					<representation mediaType="application/json" />
+				</response>
+			</method>
+			<method name="POST" id="onCreate">
+				<doc xml:lang="en" title="onCreate" />
+				<request>
+					<param name="attribute_name" type="xs:string" required="true"
+						default="" style="query" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+					<representation mediaType="application/json" />
+				</request>
 				<response status="200">
 					<representation mediaType="application/json" />
 				</response>

@@ -35,7 +35,7 @@ public class ExampleServiceTest {
 	private Gson gson = new Gson();
 
 	@Test
-	public void testOnRetrieve() {
+	public void testOnRetrievePresentThingy() {
 		Thingy thingy = new Thingy("something");
 		dao.insert(thingy);
 		Response response = service.onRetrieve(thingy.getId());
@@ -43,6 +43,12 @@ public class ExampleServiceTest {
 		Assert.assertEquals(200, response.getStatus());
 		Assert.assertEquals(thingy.getId(), response_thingy.getId());
 		Assert.assertEquals(thingy.getAttribute_name(), response_thingy.getAttribute_name());
+	}
+	
+	@Test
+	public void testOnUnknownThingy() {
+		Response response = service.onRetrieve(1234);
+		Assert.assertEquals(404, response.getStatus());
 	}
 
 	@Test
@@ -86,7 +92,9 @@ public class ExampleServiceTest {
 
 	@Test
 	public void testOnUpdateUnknownThingy() {
-
+		Thingy thingy = new Thingy("something");
+		Response response = service.onUpdate(1234,thingy.getAttribute_name());
+		Assert.assertEquals(404, response.getStatus());
 	}
 
 	/*
