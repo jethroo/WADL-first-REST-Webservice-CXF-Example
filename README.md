@@ -35,7 +35,7 @@ of this resource. The table below shows the methods and paths for the example re
 | delete | DELETE    | /thingies/{id} |
 | index  | GET       | /thingies      |
 
-The excerpt of the [WADL](WADL-first-REST-Webservice-CXF-Example/blob/master/src/main/resources/example.xml) below shows the specification of the methods `create` and `get`. Last mentioned method specifies which
+The excerpt of the [WADL](/src/main/resources/example.xml) below shows the specification of the methods `create` and `get`. Last mentioned method specifies which
 instance of resource to be retrieved within the request URL such as `GET /things/1` will return a `Thingy` with `id=1` (if existent).
 
 ```xml
