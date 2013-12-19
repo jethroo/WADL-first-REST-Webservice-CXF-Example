@@ -38,16 +38,16 @@ public class ExampleServiceTest {
 	public void testOnRetrievePresentThingy() {
 		Thingy thingy = new Thingy("something");
 		dao.insert(thingy);
-		Response response = service.onRetrieve(thingy.getId());
+		Response response = service.onRead(thingy.getId());
 		Thingy response_thingy = gson.fromJson(response.getEntity().toString(), Thingy.class);
 		Assert.assertEquals(200, response.getStatus());
 		Assert.assertEquals(thingy.getId(), response_thingy.getId());
 		Assert.assertEquals(thingy.getAttribute_name(), response_thingy.getAttribute_name());
 	}
-	
+
 	@Test
 	public void testOnUnknownThingy() {
-		Response response = service.onRetrieve(1234);
+		Response response = service.onRead(1234);
 		Assert.assertEquals(404, response.getStatus());
 	}
 
@@ -65,7 +65,7 @@ public class ExampleServiceTest {
 			dao.insert(current);
 		}
 		// see what we get then calling onList of service
-		Response response = service.onList();
+		Response response = service.onIndex();
 		Assert.assertEquals(200, response.getStatus());
 		Type listType = new TypeToken<ArrayList<Thingy>>() {
 		}.getType();
@@ -93,12 +93,25 @@ public class ExampleServiceTest {
 	@Test
 	public void testOnUpdateUnknownThingy() {
 		Thingy thingy = new Thingy("something");
-		Response response = service.onUpdate(1234,thingy.getAttribute_name());
+		Response response = service.onUpdate(1234, thingy.getAttribute_name());
 		Assert.assertEquals(404, response.getStatus());
 	}
 
-	/*
-	 * 
-	 * @Test public void testOnDelete() { fail("Not yet implemented"); }
-	 */
+	@Test
+	public void testOnDeletePresentThingy() {
+		Thingy thingy = new Thingy("something");
+		dao.insert(thingy);
+		Response response = service.onDelete(thingy.getId());
+		Thingy response_thingy = gson.fromJson(response.getEntity().toString(), Thingy.class);
+		System.out.println(response_thingy.getId());
+		System.out.println(response_thingy.getAttribute_name());
+		
+	}
+	
+	@Test
+	public void testOnDeleteUnknownThingy() {
+		Response response = service.onDelete(1234);
+		Assert.assertEquals(404, response.getStatus());
+	}
+
 }

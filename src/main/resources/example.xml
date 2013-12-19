@@ -5,8 +5,8 @@
 		<resource path="/thingies" id="thingies">
 			<doc xml:lang="en" title="thingies" />
 			<resource path="{id}">
-				<method name="GET" id="onRetrieve">
-					<doc xml:lang="en" title="onRetrieve" />
+				<method name="GET" id="onRead">
+					<doc xml:lang="en" title="onRead" />
 					<request>
 						<param name="id" type="xs:int" required="true" default=""
 							style="template" xmlns:xs="http://www.w3.org/2001/XMLSchema" />
@@ -57,7 +57,7 @@
 					</response>
 				</method>
 			</resource>
-			<method name="GET" id="onList">
+			<method name="GET" id="onIndex">
 				<doc xml:lang="en" title="onList" />
 				<request />
 				<response status="200">

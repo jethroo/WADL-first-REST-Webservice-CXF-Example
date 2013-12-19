@@ -54,5 +54,13 @@ public class ThingyDao {
 		session.getTransaction().commit();
 		return thingies;
 	}
+	
+	public void delete(Thingy thingy) {
+		Session session = getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		session.delete(thingy);
+		session.getTransaction().commit();
+
+	}
 
 }
