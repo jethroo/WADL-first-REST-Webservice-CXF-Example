@@ -11,7 +11,7 @@ a machine-readable XML description of REST web services is used. A benefit of th
 
 This comes in handy because it is less error-prone and it saves a lot of boilerplate code implementation time.
 
-# Prerequisites
+## Prerequisites
 
 In order to beeing able to run this example you need to have installed on your machine:
 
@@ -22,7 +22,7 @@ optional:
 
  * [Eclipse](http://www.eclipse.org/)
 
-# Example REST web service
+## Example REST web service
 
 In the rather simple example we want to offer CRUD methods for one resource and an index method to show all existing instances
 of this resource. The table below shows the methods and paths for the example resource `Thingy`:
@@ -80,6 +80,85 @@ instance of resource to be retrieved within the request URL such as `GET /things
 </resource>
 ```
 
+## WADLtoJava
+
+`wadl2java` can be used to generate service interfaces, model classes an method stubs out of the service description (WADL). It comes as maven plugin too and is used as such in this project. In this example solely the service interface `Thingies` is generated (not included in this codebase since it is recreated on every clean build and thus git ignored). It defines all methods priviously discussed.
+
+```java
+/**
+ * Created by Apache CXF WadlToJava code generator
+**/
+package de.jethroo.rest.example;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
+
+@Path("/thingies")
+public interface Thingies {
+
+    @GET
+    @Produces("application/json")
+    Response onIndex();
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    Response onCreate(@QueryParam("attribute_name") String attribute_name);
+
+    @GET
+    @Produces("application/json")
+    @Path("/{id}")
+    Response onRead(@PathParam("id") int id);
+
+    @PUT
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("/{id}")
+    Response onUpdate(@PathParam("id") int id, @QueryParam("attribute_name") String attribute_name);
+
+    @DELETE
+    @Produces("application/json")
+    @Path("/{id}")
+    Response onDelete(@PathParam("id") int id);
+
+}
+```
+
+This interface can now be implemented along with a model representing a Thingy. (See `/src/main/java/* for details).
+
+## JAX-RS Server
+
+In the [bean.xml](/src/main/webapp/WEB-INF/bean.xml) the service endpoint is configures along with other services and
+beans needed for the expample (e.g. a in memory HSQLDB or a Data Access Object for Thingy).
+
+```xml
+  <jaxrs:server address="http://localhost:8090/api/v1" docLocation="src/main/resources/example.xml">
+    <jaxrs:serviceBeans>
+      <bean class="de.jethroo.rest.example.ExampleServiceImpl">
+        <property name="dao" ref="thingyDao" />
+      </bean>
+    </jaxrs:serviceBeans>
+  </jaxrs:server>
+```
+Ţhe jetty maven plugin will look for the settings in `/webapp/WEB-INF` (in the projects target folder) to setup the cxf servlet and the example service.
+
+## Running the example
+
+```
+mvn clean install
+mvn jetty:run
+```
+
+A list of known contexts should be visible at `http://localhost:8080` including this example service (the WADL can be
+accessed at [http://localhost:8090/api/v1?_wadl](http://localhost:8090/api/v1?_wadl)). The service can now be tested with SOAP-UI or curl. Since for demonstrating purpose an in memory DB is used it will be dropped at shutdown of jetty.
 
 ## License
 Hereby released under MIT license.
