@@ -52,7 +52,7 @@
 		<property name="sessionFactory" ref="hibernateSessionFactory"></property>
 	</bean>
 	
-	<jaxrs:server address="http://localhost:8090" docLocation="src/main/resources/example.xml">
+	<jaxrs:server address="http://localhost:8090/api/v1" docLocation="src/main/resources/example.xml">
 		<jaxrs:serviceBeans>
 			<bean class="de.jethroo.rest.example.ExampleServiceImpl">
 				<property name="dao" ref="thingyDao" />

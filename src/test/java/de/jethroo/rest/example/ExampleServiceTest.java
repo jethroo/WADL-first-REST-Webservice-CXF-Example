@@ -103,8 +103,8 @@ public class ExampleServiceTest {
 		dao.insert(thingy);
 		Response response = service.onDelete(thingy.getId());
 		Thingy response_thingy = gson.fromJson(response.getEntity().toString(), Thingy.class);
-		System.out.println(response_thingy.getId());
-		System.out.println(response_thingy.getAttribute_name());
+		//check if thingy is really deleted
+		Assert.assertEquals(null,dao.findById(response_thingy.getId()));
 		
 	}
 	
