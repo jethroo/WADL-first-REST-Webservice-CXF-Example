@@ -16,7 +16,7 @@ This comes in handy because it is less error-prone and it saves a lot of boilerp
 In order to beeing able to run this example you need to have installed on your machine:
 
  * [Maven](http://maven.apache.org/) (2.x or higher)
- * [Java Runtime Environment](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (1.7 or higher)
+ * [Java Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (1.7 or higher)
 
 optional:
 
@@ -136,7 +136,7 @@ This interface can now be implemented along with a model representing a Thingy. 
 
 ## JAX-RS Server
 
-In the [bean.xml](/src/main/webapp/WEB-INF/bean.xml) the service endpoint is configures along with other services and
+In the [bean.xml](/src/main/webapp/WEB-INF/bean.xml) the service endpoint is configured along with other services and
 beans needed for the expample (e.g. a in memory HSQLDB or a Data Access Object for Thingy).
 
 ```xml
