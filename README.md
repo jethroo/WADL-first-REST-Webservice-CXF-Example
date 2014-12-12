@@ -1,5 +1,12 @@
-WADL first REST Webservice with CXF Example
-===========================================
+# WADL first REST Webservice with CXF Example
+
+## Preface
+
+If your are looking for a path to choose for your API i would like to recommend 
+[API Providers Guide - API Management] (https://s3.amazonaws.com/kinlane-productions/whitepapers/API+Evangelist+-+API+Providers+Guide+-+API+Management.pdf)
+by Kin Lane which will introduce tools and ways of thinking about restfull APIs in the last years.
+
+## Introduction
 
 A simple example how to implement a REST web service with Java based CXF and JAX-RS following the contract
 first approach. For code first approaches [Jersey](https://jersey.java.net/) might be a better choice for
