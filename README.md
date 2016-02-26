@@ -2,7 +2,7 @@
 
 ## Preface
 
-If your are looking for a path to choose for your API i would like to recommend 
+If your are looking for a path to choose for your API I would like to recommend 
 [API Evangelist] (http://apievangelist.com/index.html)
 by Kin Lane which will introduce tools and ways of thinking about APIs in the developed in the last years.
 
@@ -12,7 +12,7 @@ A simple example how to implement a REST web service with Java based CXF and JAX
 first approach. For code first approaches [Jersey](https://jersey.java.net/) might be a better choice for
 kick starting due to handy Maven Archetypes.
 
-Contact first means that the implementation is started after a full specification of the REST Webservice has
+Contract first means that the implementation is started after a full specification of the REST Webservice has
 been elaborated and documented in a well defined format. In this example Web Application Description Language (WADL)
 a machine-readable XML description of REST web services is used. A benefit of this approach, besides having a contract document, which can serve as basis for communication between the implementor and the consumer side or to handle change requests, is that one can use tools to generate a first code basis for the implementing the service itself.
 
